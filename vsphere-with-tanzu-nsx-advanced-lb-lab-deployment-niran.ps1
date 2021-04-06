@@ -2,13 +2,13 @@
 # Website: www.virtuallyghetto.com
 
 # vCenter Server used to deploy vSphere with Tanzu with NSX Advanced Load Balancer Lab
-$VIServer = "FILL-ME-IN"
-$VIUsername = "FILL-ME-IN"
-$VIPassword = "FILL-ME-IN"
+$VIServer = "192.168.110.22"
+$VIUsername = "administrator@corp.local"
+$VIPassword = "VMware1!"
 
 # Full Path to both the Nested ESXi 7.0 VA, Extracted VCSA 7.0 ISO & NSX Advanced 20.1.4 OVA
-$NestedESXiApplianceOVA = "C:\Users\william\Desktop\tanzu\Nested_ESXi7.0u2_Appliance_Template_v1.ova"
-$VCSAInstallerPath = "C:\Users\william\Desktop\tanzu\VMware-VCSA-all-7.0.2-17694817"
+$NestedESXiApplianceOVA = "E:\Downloads\VMware-VMvisor-Installer-7.0U2-17630552.x86_64.iso"
+$VCSAInstallerPath = "E:\Downloads\VMware-VCSA-all-7.0.2-17694817.iso"
 $NSXAdvLBOVA = "C:\Users\william\Desktop\tanzu\controller-20.1.4-9087.ova"
 
 # TKG Content Library URL
@@ -17,32 +17,32 @@ $TKGContentLibraryURL = "https://wp-content.vmware.com/v2/latest/lib.json"
 
 # Nested ESXi VMs to deploy
 $NestedESXiHostnameToIPs = @{
-    "tanzu-esxi-1" = "172.17.33.4"
-    "tanzu-esxi-2" = "172.17.33.5"
-    "tanzu-esxi-3" = "172.17.33.6"
+    "niranec-esx-01.corp.local" = "192.168.110.61"
+    "niranec-esx-02.corp.local" = "192.168.110.62"
+    "niranec-esx-03.corp.local" = "192.168.110.63"
 }
 
 # Nested ESXi VM Resources
-$NestedESXivCPU = "4"
-$NestedESXivMEM = "24" #GB
-$NestedESXiCachingvDisk = "8" #GB
-$NestedESXiCapacityvDisk = "200" #GB
+$NestedESXivCPU = "8"
+$NestedESXivMEM = "128" #GB
+$NestedESXiCachingvDisk = "150" #GB
+$NestedESXiCapacityvDisk = "250" #GB
 
 # VCSA Deployment Configuration
 $VCSADeploymentSize = "tiny"
-$VCSADisplayName = "tanzu-vcsa-1"
-$VCSAIPAddress = "172.17.33.3"
-$VCSAHostname = "tanzu-vcsa-1.tshirts.inc" #Change to IP if you don't have valid DNS
+$VCSADisplayName = "niranec-vcsa"
+$VCSAIPAddress = "192.168.110.30"
+$VCSAHostname = "niranec-vcsa.corp.local" #Change to IP if you don't have valid DNS
 $VCSAPrefix = "24"
-$VCSASSODomainName = "vsphere.local"
+$VCSASSODomainName = "corp.local"
 $VCSASSOPassword = "VMware1!"
 $VCSARootPassword = "VMware1!"
 $VCSASSHEnable = "true"
 
 # NSX Advanced LB Configuration
-$NSXAdvLBDisplayName = "tanzu-nsx-alb"
-$NSXAdvLByManagementIPAddress = "172.17.33.9"
-$NSXAdvLBHostname = "tanzu-nsx-alb.tshirts.inc"
+$NSXAdvLBDisplayName = "niranec-nsx-alb"
+$NSXAdvLByManagementIPAddress = "192.168.110.81"
+$NSXAdvLBHostname = "niranec-nsx-alb.corp.local"
 $NSXAdvLBAdminPassword = "VMware1!"
 $NSXAdvLBvCPU = "8" #GB
 $NSXAdvLBvMEM = "24" #GB
@@ -50,17 +50,17 @@ $NSXAdvLBPassphrase = "VMware"
 $NSXAdvLBIPAMName = "Tanzu-Defaulf-IPAM"
 
 # Service Engine Management Network Configuration
-$NSXAdvLBManagementNetwork = "172.17.33.0"
+$NSXAdvLBManagementNetwork = "192.168.110.82"
 $NSXAdvLBManagementNetworkPrefix = "24"
-$NSXAdvLBManagementNetworkStartRange = "172.17.33.180"
-$NSXAdvLBManagementNetworkEndRange = "172.17.33.187"
+$NSXAdvLBManagementNetworkStartRange = "192.168.110.180"
+$NSXAdvLBManagementNetworkEndRange = "192.168.110.187"
 
 # VIP/Workload Network Configuration
 $NSXAdvLBCombinedVIPWorkloadNetwork = "Nested-Tanzu-Workload"
-$NSXAdvLBWorkloadNetwork = "172.17.32.128"
+$NSXAdvLBWorkloadNetwork = "192.168.110.128"
 $NSXAdvLBWorkloadNetworkPrefix = "26"
-$NSXAdvLBWorkloadNetworkStartRange = "172.17.32.152"
-$NSXAdvLBWorkloadNetworkEndRange = "172.17.32.159"
+$NSXAdvLBWorkloadNetworkStartRange = "192.168.110.152"
+$NSXAdvLBWorkloadNetworkEndRange = "192.168.110.159"
 
 # Self-Sign TLS Certificate
 $NSXAdvLBSSLCertName = "nsx-alb"
@@ -73,18 +73,18 @@ $NSXAdvLBSSLCertState = "CA"
 $NSXAdvLBSSLCertCountry = "US"
 
 # General Deployment Configuration for Nested ESXi, VCSA & NSX Adv LB VM
-$VMDatacenter = "San Jose"
-$VMCluster = "Compute Cluster"
-$VMNetwork = "Nested-Tanzu-Mgmt"
-$VMDatastore = "comp-vsanDatastore"
+$VMDatacenter = "vSphere-Datacenter"
+$VMCluster = "vSphere-Cluster"
+$VMNetwork = "niranec-Mgmt"
+$VMDatastore = "Datastore"
 $VMNetmask = "255.255.255.0"
-$VMGateway = "172.17.33.1"
-$VMDNS = "172.17.31.2"
-$VMNTP = "45.87.78.35"
+$VMGateway = "192.168.110.1"
+$VMDNS = "192.168.110.10"
+$VMNTP = "192.168.110.10"
 $VMPassword = "VMware1!"
-$VMDomain = "tshirts.inc"
-$VMSyslog = "172.17.33.3"
-$VMFolder = "Tanzu"
+$VMDomain = "corp.local"
+#$VMSyslog = "172.17.33.3"
+$VMFolder = "niranec-Pacific"
 # Applicable to Nested ESXi only
 $VMSSH = "true"
 $VMVMFS = "false"
