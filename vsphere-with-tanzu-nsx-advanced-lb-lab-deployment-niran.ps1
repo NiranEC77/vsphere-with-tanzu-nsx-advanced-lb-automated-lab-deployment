@@ -8,7 +8,7 @@ $VIPassword = "VMware1!"
 
 # Full Path to both the Nested ESXi 7.0 VA, Extracted VCSA 7.0 ISO & NSX Advanced 20.1.4 OVA
 $NestedESXiApplianceOVA = "E:\Downloads\VMware-VMvisor-Installer-7.0U2-17630552.x86_64.iso"
-$VCSAInstallerPath = "E:\Downloads\VMware-VCSA-all-7.0.2-17694817.iso"
+$VCSAInstallerPath = "f:\"
 $NSXAdvLBOVA = "C:\Users\william\Desktop\tanzu\controller-20.1.4-9087.ova"
 
 # TKG Content Library URL
